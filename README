@@ -1,0 +1,86 @@
+File: ex6a.c
+ ========================================
+
+File: ex6a1.c
+ ========================================
+ Writen by: Rotem Kashani , id = 209073352 , login = rotemkash 
+	    Mahmood Jazmawy , id= 211345277, login=Mahmoodja
+This if the "Filler" process and the owner of the array.
+it initializes an array with 100 cells. it loops a 100 times 
+getting data through a socket from 3 other processes. if the number 
+sent by the process is bigger/equal to the last number in the array it inserts that 
+number in the array and send the matching process 1. if the number is not larger/equal 
+it send 0. after 100 iterations, whether the array is full or not, it prints the data 
+we were asked to show (array size, min value, max value). then it sends -1 to the 
+process indicating to finish and printing how many number each process has entered 
+to the array.
+
+Compile: gcc ex6a1.c -Wall -o ex6a1
+
+Run: ex6a1
+
+File: ex6a2.c 
+ ========================================
+ Writen by: Rotem Kashani , id = 209073352 , login = rotemkash 
+	    Mahmood Jazmawy , id= 211345277, login=Mahmoodja
+This is the "prime number creators" program.
+when they are ran they create a pipe with the filler process.
+when all 3 creators are up and running they receive a signal 
+to start drawing random prime number and sending them to the Filler.
+if the number the process draws enters the array im the Filler it adds 
+one to a counter. after the Filler is finished and sent the signal to the
+process here to finish this process prints how much numbers it managed to
+insert in the array.
+
+Compile: gcc ex6a2.c -Wall -o ex6a2
+
+Run: ex6a2 1 localhost 12121
+(and respectively 2 for the second copy and 3 for the third copy)
+
+File: ex6b.c
+ ========================================
+
+File: ex6b1.c
+ ========================================
+ Writen by: Rotem Kashani , id = 209073352 , login = rotemkash 
+	    Mahmood Jazmawy , id= 211345277, login=Mahmoodja
+This program is our server that checks for prime numbers. 
+it receives a string through the socket and returns a string
+that contains only the prime numbers that where in it if there 
+were no prime numbers in the string it returns 0
+
+Compile: gcc ex6b1.c -Wall -o ex6b1
+
+Run: ex6b1 1234 
+
+File: ex6b2.c 
+ ========================================
+ Writen by: Rotem Kashani , id = 209073352 , login = rotemkash 
+	    Mahmood Jazmawy , id= 211345277, login=Mahmoodja
+
+This program is our server that checks for palindrome series.
+it receives a string containing a series of number. it checks if the
+series is a palindrome and returns to the client through it's socket 1 
+if it's a palindrome and 0 otherwise
+ 
+Compile: gcc ex6b2.c -Wall -o ex6b2
+
+Run: ex6b2 5678
+
+File: ex6b3.c 
+ ========================================
+ Writen by: Rotem Kashani , id = 209073352 , login = rotemkash 
+	    Mahmood Jazmawy , id= 211345277, login=Mahmoodja
+this is the front end side of our program. it prompts the user to enter a command 'q' or 'p'.
+'p': it waits for the user to enter a series of numbers that end with a 0. it puts the numbers
+in a string and sends it to the prime server using it's socket after it receives an answer 
+from the server it prints it.
+'q': it waits for the user to enter a series of number and a 0 at the end of it. 
+it puts the numbers in a string and sends it to the palindrome checking server.
+the server sends back if the series of number is a palindrome or not.
+'e': it quits the program and frees the socket.
+
+Compile: gcc ex6b3.c -Wall -o ex6b3
+
+Run: ex6b3 10.3.10.25 1234 10.3.10.25 5678
+
